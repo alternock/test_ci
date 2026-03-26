@@ -9,3 +9,9 @@ jobs:
     steps:
       - name: saludos desde git actions
         run: echo "hola desde la shell de github actions"
+
+      - name: info del runner
+        run: |
+          echo "tipo de runner: $RUNNER_OS"
+          echo "tipo de python3: $(python3 --version)"
+          echo "tipo de git: $(git --version)"
