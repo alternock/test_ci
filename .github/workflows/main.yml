@@ -1,0 +1,14 @@
+name: Test
+'on': push
+jobs:
+  information:
+    runs-os: ubuntu-latest
+    steps:
+      - name: mensaje de saludo
+        run: echo "hola desde la shell de github actions"
+      - name: datos del runs-on
+        run: |
+          echo "tipo de runner: $RUNNER_OS"
+          echo "fecha $(data)"
+          echo "python $(python3 --version)"
+          echo "git $(git --version)"
