@@ -1,17 +1,19 @@
-name: Test
+name: main-test
 
 on: push
 
-
 jobs:
-  information:
+  my-test:
     runs-on: ubuntu-latest
     steps:
-      - name: saludos desde git actions
-        run: echo "hola desde la shell de github actions"
+        - name: saludo desde github actions
+          run: echo "bienvenido este es mi test"
 
-      - name: info del runner
-        run: |
-          echo "tipo de runner: $RUNNER_OS"
-          echo "tipo de python3: $(python3 --version)"
-          echo "tipo de git: $(git --version)"
+        - name: info del runner
+          run: | 
+            echo "runner: $RUNNER_OS"
+            echo "git: $(git --version)"
+            echo "python3: $(python3 --version)"
+            echo "fecha: $(date)"
+
+            
