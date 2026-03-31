@@ -1,44 +1,35 @@
-name: main-test
+name: test-app
 
-on: 
+on:
   push:
-    branches: [main, develop]
-
+      branches:
+        - main
+  
   pull_request:
-    branches: 
-      - main
-      - develop
-      - 'feature/**'
-      - 'feat/**'
+      branches:
+        - main 
+        - 'features/**'
 
 jobs:
-  my-test:
-    runs-on: ubuntu-latest
+  test-app:
+    runs-on: ubuntu-24.04
     steps:
-        - name: saludo desde github actions
-          run: echo "bienvenido este es mi test"
+      - name: descargar app
+        uses: actions/checkout@v4
 
-        - name: info del runner
-          run: | 
-            echo "runner: $RUNNER_OS"
-            echo "git: $(git --version)"
-            echo "python3: $(python3 --version)"
-            echo "fecha: $(date)"
+      - name: instalar python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
           
-        - name: tipo de evento
-          if: github.event_name == 'push'
-          run: echo "es un evento push"
+      - name: instalar dependencias de la app     
+        run: |
+          python3 -m pip --upgrade pip 
+          pip install -r requirements.txt
 
-        - name: tipo de rama y evento
-          if: github.event_name == 'push' && github.ref == 'refs/heads/name'
-          run: echo "es la ramam main y se hizo un evento push"
+      - name: ejecutar app
+        run: | 
+          flask run --app app --localhost=0.0.0.0 --port=5000
+        
 
-        - name: todo funciona bien
-          if: success()
-          run: echo "todo esta success"
-
-          
-      
-
-
-          
+        
