@@ -11,12 +11,15 @@ env:
 jobs:
   j1:
     runs-on: ubuntu-latest
+    env:
+     LOCAL_J1: "var local-j1"
     steps:
       - name: hola desde test
         run: |
          echo "hola bienvenido a test"
          echo "esto es un ${{ env.SALUDO }}"
-
+         echo "local var ${{ env.LOCAL_J1 }}"
+          
   j2:
     runs-on: ubuntu-latest
     steps:
