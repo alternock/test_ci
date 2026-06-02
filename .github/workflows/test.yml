@@ -21,3 +21,17 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-v }}
+
+
+  multiple_python:
+    strategy:
+      matrix:
+        python-version: [3.11, 3.12]
+
+    runs-on: ubuntu-slim
+    steps:
+      - name: descargar multiples python
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python-version }}   
+
