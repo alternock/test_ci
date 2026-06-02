@@ -6,6 +6,7 @@ on:
       - main 
 env:
   SALUDO: "saludo global"
+  CMD: "es un CMD"
 
 jobs:
   j1:
@@ -16,4 +17,9 @@ jobs:
          echo "hola bienvenido a test"
          echo "esto es un ${{ env.SALUDO }}"
 
+  j2:
+    runs-on: ubuntu-latest
+    steps:
+      - name: condiciones
+        run: echo "esto es un saludo ${{ env.CMD }}"
         
