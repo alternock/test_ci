@@ -22,7 +22,11 @@ jobs:
           
   j2:
     runs-on: ubuntu-latest
+    env:
+      LOCAL_J2: "var local j-2"
     steps:
       - name: condiciones
-        run: echo "esto es un saludo ${{ env.CMD }}"
-        
+        run: | 
+          echo "esto es un saludo ${{ env.CMD }}"
+          echo "var local ${{ env.LOCAL_J1 }} "         
+          echo "var local ${{ env.LOCAL_J2 }} "         
