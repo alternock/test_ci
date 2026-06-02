@@ -1,14 +1,15 @@
-name: test_actions
+name: test
 
 on:
   push:
     branches:
-      - main
-      - develop
+      - main 
 
 jobs:
-  messages:
-    runs-on: ubuntu-24.04
+  j1:
+    runs-on: ubuntu-latest
     steps:
-      - name: say
-        run: echo "hello from github action in test_actions"
+      - name: hola desde test
+        run: echo "hola binevenido a test"
+
+        
