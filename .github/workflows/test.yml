@@ -4,12 +4,16 @@ on:
   push:
     branches:
       - main 
+env:
+  SALUDO: "saludo global"
 
 jobs:
   j1:
     runs-on: ubuntu-latest
     steps:
       - name: hola desde test
-        run: echo "hola binevenido a test"
+        run: |
+         echo "hola bienvenido a test"
+         echo "esto es un ${{ env.SALUDO }}"
 
         
