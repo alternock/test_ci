@@ -3,44 +3,21 @@ name: test
 on: 
   push:
     branches:
-      - main
-
-env:
-  GLOBAL: "variable global"
+      - main 
 
 jobs:
-  j1:
-   runs-on: ubuntu-latest
-   steps:
-    - name: hola desde github actions
-      run: echo "hola desde github actions"
+  multiple_os:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, ubuntu-slim]        
+        node-v: [18,19]
 
-  j2: 
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}    
     steps:
-      - name: saludo global
-        run: echo "saludo con ${{ env.GLOBAL }}"        
+      - name: ejecutando msj desde varios ubuntu
+        run: echo "hola desde ubuntu"
 
-  j3:
-    runs-on: ubuntu-latest
-    env:
-      LOCAL: "variable local"
-    steps:
-      - name: saludo local
-        run: echo "saludo con ${{ env.LOCAL }}"
-
-  j4:
-    runs-on: ubuntu-local
-    steps:
-      - name: condicion verificar si es pr
-        if: github.event_name == 'pull_request'
-        run: echo "pull request detectado"
-
-  j5: 
-    runs-on: ubuntu-latest       
-    steps: 
-    - name: descargar python
-      uses: actions/setup-python@v5
-      with:
-        python-version: '3.11'
-
+      - name: descargando nodejs  
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-v }}
