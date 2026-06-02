@@ -1,32 +1,46 @@
 name: test
 
-on:
+on: 
   push:
     branches:
-      - main 
+      - main
+
 env:
-  SALUDO: "saludo global"
-  CMD: "es un CMD"
+  GLOBAL: "variable global"
 
 jobs:
   j1:
+   runs-on: ubuntu-latest
+   steps:
+    - name: hola desde github actions
+      run: echo "hola desde github actions"
+
+  j2: 
+    runs-on: ubuntu-latest
+    steps:
+      - name: saludo global
+        run: echo "saludo con ${{ env.GLOBAL }}"        
+
+  j3:
     runs-on: ubuntu-latest
     env:
-     LOCAL_J1: "var local-j1"
+      LOCAL: "variable local"
     steps:
-      - name: hola desde test
-        run: |
-         echo "hola bienvenido a test"
-         echo "esto es un ${{ env.SALUDO }}"
-         echo "local var ${{ env.LOCAL_J1 }}"
-          
-  j2:
-    runs-on: ubuntu-latest
-    env:
-      LOCAL_J2: "var local j-2"
+      - name: saludo local
+        run: echo "saludo con ${{ env.LOCAL }}"
+
+  j4:
+    runs-on: ubuntu-local
     steps:
-      - name: condiciones
-        run: | 
-          echo "esto es un saludo ${{ env.CMD }}"
-          echo "var local ${{ env.LOCAL_J1 }} "         
-          echo "var local ${{ env.LOCAL_J2 }} "         
+      - name: condicion verificar si es pr
+        if: github.event_name == 'pull_request'
+        run: echo "pull request detectado"
+
+  j5: 
+    runs-on: ubuntu-latest       
+    steps: 
+    - name: descargar python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'
+
